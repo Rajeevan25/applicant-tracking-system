@@ -21,3 +21,17 @@ class JobAdvertisementForm(ModelForm):
             'skills': forms.TextInput(attrs={ 'placeholder': 'comma separated skills','class': 'form-control'}),
             'deadline': forms.DateInput(attrs={'type': 'date','placeholder': 'YYYY-MM-DD','class': 'form-control'}),
         }
+
+class JobApplicationForm(ModelForm):
+    class Meta:
+        model = JobApplication
+        fields = [
+            'name', 'email', 'portfolio_url', 'resume', 'cover_letter'
+        ]
+        widgets = {
+            'name': forms.TextInput(attrs={'maxlength': 255, 'placeholder': 'Your Name','class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Your Email','class': 'form-control'}),
+            'portfolio_url': forms.URLInput(attrs={'placeholder': 'Portfolio URL','class': 'form-control'}),
+            'resume': forms.ClearableFileInput(attrs={'placeholder': 'Upload Resume','class': 'form-control', 'accept': '.pdf,.doc,.docx'}),
+            'cover_letter': Textarea(attrs={'rows': 4, 'placeholder': 'Cover Letter','class': 'form-control'}),
+        }   

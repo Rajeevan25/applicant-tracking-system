@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 
-{% comment %}
 {% load humanize %}
-{% endcomment %}
+
 
 {% block title %} Job Portal |  {% endblock %}
 
 {% block content %}
 
 {% include 'header.html' %}
-
 <div class="search-container">
     <form action="" method="GET" class="search-box">
         <input type="text" name="keyword" placeholder="title, company, description, skills">
@@ -25,10 +23,9 @@
                 <h3>{{advert.title}}</h3>
                 <p><strong>Company:</strong> {{advert.company_name}}</p>
                 <p><strong>Type:</strong> {{advert.job_type}}</p>
-                <p><strong>Posted:</strong> {{advert.created_at}}</p>
+                <p><strong>Posted:</strong> {{advert.created_at | naturalday | title }}</p>
                 <p><strong>Skills:</strong>{{advert.skills|truncatechars:14}}</p>
-                <a class="small-btn"  href="">View Details</a>
-
+                <a class="small-btn"  href="{% url 'application_tracking:get_advertisement' advert.id %}">View Details</a>
             </div>
 
         {% empty %}

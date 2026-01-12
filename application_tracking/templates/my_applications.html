@@ -28,19 +28,23 @@
                     <td>{{ application.email }}</td>
                     <td><a href="{{ application.portfolio_url }}" target="_blank">View Portfolio</a></td>
                     <td>
-                        <a href="{{ application.cv.url }}" target="_blank">
+                        <a href="{{ application.resume.url }}" target="_blank">
                             Download CV
                         </a>
                     </td>
                     <td>
-                        <a href="{% url 'job_advert' application.job_advert.id %}" target="_blank">
-                            {{ application.job_advert.title }}
-                        </a>
+                        {% if application.job_advertisement %}
+                            <a href="{% url 'application_tracking:get_advertisement' application.job_advertisement.id %}" target="_blank">
+                                {{ application.job_advertisement.title }}
+                            </a>
+                        {% else %}
+                            <span class="text-muted">Advertisement deleted</span>
+                        {% endif %}
                     </td>
                     <td>{{ application.status }}</td>
-                    <td>{{ application.job_advert.created_at }}</td>
+                    <td>{{ application.job_advertisement.created_at }}</td>
                     <td>{{ application.created_at }}</td>
-                    <td>{{application.job_advert.total_applicants}}</td>
+                    <td>{{application.job_advertisement.total_applications}}</td>
 
                 </tr>
                 {% endfor %}

@@ -38,14 +38,14 @@
                         <span style="color: red;">Closed</span>
                         {% endif %}
                     </td>
-                    <td>{{ job.total_applicants }}</td>
+                    <td>{{ job.total_applications }}</td>
                     <td>
                         <a href="" target="_blank">
                             View applicants
                         </a>
                     </td>
                     <td>
-                        <a href="" target="_blank">
+                        <a href="{% url 'application_tracking:get_advertisement' advertisement_id=job.id %}" target="_blank">
                             View job
                         </a>
                     </td>

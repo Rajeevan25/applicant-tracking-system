@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
 ]
 # Custom user model
 AUTH_USER_MODEL = 'core.CustomUser'
@@ -128,6 +130,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'ats_backend/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# MEDIA_URL = '/resumes/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'resumes')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
