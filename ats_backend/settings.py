@@ -41,9 +41,13 @@ INSTALLED_APPS = [
 ]
 # Custom user model
 AUTH_USER_MODEL = 'core.CustomUser'
+LOGIN_URL = '/auth/login'  # Redirect to login page if not authenticated
 INSTALLED_APPS += [
     'core',   # Your app containing the CustomUser model
     'rest_framework',
+    'common',
+    'application_tracking',
+
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

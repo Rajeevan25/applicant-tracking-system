@@ -2,6 +2,7 @@ from contextvars import Token
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from .models import CustomUser, PendingUser, TokenTypes, Token
+from .decorators import redirect_authenticated_user
 from django.contrib import messages
 from django.utils.crypto import get_random_string   
 from django.contrib.auth.hashers import make_password
@@ -10,9 +11,11 @@ from django.contrib import auth
 from datetime import datetime, timezone
 from common.tasks import send_email
 
+
 def home(request: HttpRequest) -> HttpResponse:
     return render(request, 'home.html')
 
+@redirect_authenticated_user
 def login(request: HttpRequest):
     if request.method == "POST":
         email = request.POST.get("email")
@@ -21,6 +24,7 @@ def login(request: HttpRequest):
         try:
             user = CustomUser.objects.get(email=email)
         except CustomUser.DoesNotExist:
+            print(password)
             messages.error(request, "Invalid email or password.")
             return redirect("login")
         if user.check_password(password):
@@ -52,7 +56,7 @@ def register(request: HttpRequest) -> HttpResponse:
             pending_user = PendingUser.objects.update_or_create(
                 email=cleaned_email, # Ensure email uniqueness
                 defaults={
-                    'password': make_password(password),  # In a real app, hash the password before storing
+                    'password': password,  # Store the password as plain text for now
                     'verification_code': verification_code,
                     'created_at': datetime.now(timezone.utc),  # Store the creation time
                 }
@@ -182,3 +186,4 @@ def set_new_password(request: HttpRequest):
 
     else:
         return redirect('home')
+    

@@ -22,4 +22,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('auth/', include('core.urls')),  # Include URLs from the core app
+    path('applications/', include('application_tracking.urls')),  # Include URLs from the application_tracking app
 ]

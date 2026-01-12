@@ -82,3 +82,4 @@ pytest -k "test_login_invalid_credentials"
 - Passwords are securely hashed
 - Email verification required before login
 - Fully tested authentication flow
+chat.extensionUnification.enabled
